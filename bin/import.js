@@ -4,7 +4,11 @@ const dir = require('node-dir')
 const parse = require('csv-parse/lib/sync')
 
 const database = require('../database')
-const { loadFromAPI, insertAsBulk } = require('../models/Statement')
+const { Statement, parseFromAPI } = require('../models/Statement')
+
+const errorCallback = (err) => {
+  if (err) throw err
+}
 
 const path = `${__dirname}/../data/`
 const options = {
@@ -15,7 +19,7 @@ const options = {
 let records = []
 
 const onFile = (err, content, next) => {
-  if (err) throw err
+  errorCallback(err)
 
   records = records.concat(
     parse(content, {
@@ -29,9 +33,14 @@ const onFile = (err, content, next) => {
 }
 
 const onFinished = (err) => {
-  if (err) throw err
+  errorCallback(err)
 
-  insertAsBulk(loadFromAPI(records))
+  Statement.remove({}, errorCallback) 
+  Statement.create(
+    parseFromAPI(records.reverse()),
+    errorCallback
+  )
+
   database.close()
 }
 
