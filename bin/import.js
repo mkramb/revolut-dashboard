@@ -4,7 +4,7 @@ const dir = require('node-dir')
 const parse = require('csv-parse/lib/sync')
 
 const database = require('../database')
-const { Statement, parseFromAPI } = require('../models/Statement')
+const { Statement, parseFromAPI } = require('../src/models/statement')
 
 const errorCallback = (err) => {
   if (err) throw err

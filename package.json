@@ -2,17 +2,20 @@
   "name": "revolut-dashboard",
   "version": "1.0.0",
   "scripts": {
-    "import": "./bin/import.js"
+    "import": "./bin/import.js",
+    "server": "./bin/server.js"
   },
   "author": "Mitja Kramberger",
   "license": "MIT",
   "devDependencies": {
     "csv-parse": "^1.2.0",
-    "node-dir": "^0.1.17"
+    "node-dir": "^0.1.17",
+    "nodemon": "^1.11.0"
   },
   "dependencies": {
     "dotenv": "^4.0.0",
     "mathjs": "^3.14.2",
-    "mongoose": "^4.11.3"
+    "mongoose": "^4.11.3",
+    "restify": "^5.0.1"
   }
 }
